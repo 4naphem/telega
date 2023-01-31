@@ -9,7 +9,7 @@ def start(message):
            f'Для записи в столовую на <u>завтра</u> введите свою фамилию, как в паспорте)'
     # отправка в тот же чат по id
     bot.send_message(message.chat.id, mess, parse_mode='html');
-# отслеживание /help
+
 # @bot.message_handler(commands=['add'])
 # def add_lunch(message):
 #     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1, one_time_keyboard=True)
@@ -17,5 +17,6 @@ def start(message):
 #     add_five = types.KeyboardButton('На неделю')
 #     markup.add(add_one, add_five)
 #     bot.send_message(message.chat.id, 'Получить талон:', reply_markup=markup)
-bot.re
+
 bot.polling(none_stop=True)
+#asaa
