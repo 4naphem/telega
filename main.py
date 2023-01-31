@@ -19,4 +19,3 @@ def add_lunch(message):
     bot.send_message(message.chat.id, 'Получить талон:', reply_markup=markup)
 
 bot.polling(none_stop=True)
-2
