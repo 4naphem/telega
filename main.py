@@ -33,7 +33,7 @@ def review(message):
     else:
         url = 'http://sqlsrv/multi/hs/Canteen/UsersList/?id=123&pp=123' + save_mess_tomorrow
         send_post = requests.get(url)
-    print(send_post)
+    print(send_post, message.text, now.strftime('%H:%M'))
 
 
 def telega_polling():
