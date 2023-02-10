@@ -5,7 +5,7 @@ logger = logging.getLogger('MyLog')
 bot = telebot.TeleBot("5800314423:AAGrbowq4JXK5koSlUNXXd2q9Joc8sF8mvk")
 tomorrow = datetime.datetime.today() + datetime.timedelta(days=1)
 now = datetime.datetime.now()
-today_9_10 = now.replace(hour=9, minute=10)
+today_9_10 = now.replace(hour=20, minute=10)
 
 
 @bot.message_handler(commands=['start'])
@@ -17,23 +17,27 @@ def start(message):
 
 @bot.message_handler(commands=['help'])
 def start(message):
-    mess = f' Для записи в столовую на <u>завтра</u> отправьте свою фамилию следующим сообщением.' \
+    mess = f' Для записи в столовую на <u>завтра</u> отправьте свои ФИО полностью как в паспорте.' \
            f'\nЭту операцию необходимо проделывать каждый раз для записи: \n(/help->Фамилия).'
     answer = bot.send_message(message.chat.id, mess, parse_mode='html')
     bot.register_next_step_handler(answer, review)
 
 
 def review(message):
-    save_mess_today = '&user=' + message.text + '&date=' + now.strftime('%d-%m-%Y')
-    save_mess_tomorrow = '&user=' + message.text + '&date=' + tomorrow.strftime('%d-%m-%Y')
+    answer = message.text
+    split = answer.split()
+    save_mess1 = '&FirstName=' + split[0] + '&SecondName=' + split[1] + "&LastName=" + split[2] + '&Date=' + now.strftime('%Y%m%d')
+    save_mess2 = 'Запись на сегодня закончена! Записаться можно до 9:10.'
     if now < today_9_10:
-        url = 'http://sqlsrv/multi/hs/Canteen/UsersList/?id=123&pp=123' + save_mess_today
-        send_post = requests.get(url)
+        url = 'http://sqlsrv/multi/hs/Canteen/AddList?id=123' + save_mess1
+        ans = requests.get(url)
+        print(ans.json(), ans)
 
     else:
-        url = 'http://sqlsrv/multi/hs/Canteen/UsersList/?id=123&pp=123' + save_mess_tomorrow
-        send_post = requests.get(url)
-    print(send_post, message.text, now.strftime('%H:%M'))
+        bot.send_message(message.chat.id, save_mess2 , parse_mode='html')
+        requests.get(url)
+        print('Нарушено расписание:', save_mess1, now.strftime('%H:%M'))
+
 
 
 def telega_polling():
