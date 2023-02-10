@@ -35,7 +35,6 @@ def review(message):
 
     else:
         bot.send_message(message.chat.id, save_mess2 , parse_mode='html')
-        requests.get(url)
         print('Нарушено расписание:', save_mess1, now.strftime('%H:%M'))
 
 
