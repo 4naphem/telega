@@ -848,3 +848,6 @@ Traceback (most recent call last):
     raise ApiTelegramException(method_name, result, result_json)
 telebot.apihelper.ApiTelegramException: A request to the Telegram API was unsuccessful. Error code: 409. Description: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
 
+2023-02-15 11:35:13,822 - INFO - сотрудник
+2023-02-15 11:42:01,825 - INFO - Cотрудник: 
+2023-02-15 11:42:01,849 - INFO - Cотрудник: 

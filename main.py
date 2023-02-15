@@ -5,7 +5,9 @@ logger = logging.getLogger('MyLog')
 bot = telebot.TeleBot("5800314423:AAGrbowq4JXK5koSlUNXXd2q9Joc8sF8mvk")
 tomorrow = datetime.datetime.today() + datetime.timedelta(days=1)
 now = datetime.datetime.now()
-today_9_10 = now.replace(hour=20, minute=10)
+today_9_10 = now.replace(hour=19, minute=10)
+S_RUS = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя '
+S_RUS_UPPER = S_RUS.upper()
 
 
 @bot.message_handler(commands=['start'])
@@ -27,16 +29,16 @@ def review(message):
     answer = message.text
     split = answer.split()
     save_mess1 = '&FirstName=' + split[0] + '&SecondName=' + split[1] + "&LastName=" + split[2] + '&Date=' + now.strftime('%Y%m%d')
-    save_mess2 = 'Запись на сегодня закончена! Записаться можно до 9:10.'
+    save_mess2 = 'Запись на сегодня закончена! Записаться можно до 9:10.\n' \
+                 'Для записи на завтра введите /tomorrow'
+    url = 'http://sqlsrv/multi/hs/Canteen/AddList?id=123' + save_mess1
+    ans = requests.get(url)
+    to_user = ans.json()
     if now < today_9_10:
-        url = 'http://sqlsrv/multi/hs/Canteen/AddList?id=123' + save_mess1
-        ans = requests.get(url)
-        print(ans.json(), ans)
-
+        bot.send_message(message.chat.id, to_user['Ansfer'] + ' на ' + now.strftime('%d-%m-%Y'), parse_mode='html')
+        print(to_user['Ansfer'])
     else:
         bot.send_message(message.chat.id, save_mess2 , parse_mode='html')
-        print('Нарушено расписание:', save_mess1, now.strftime('%H:%M'))
-
 
 
 def telega_polling():
