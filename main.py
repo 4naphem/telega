@@ -9,10 +9,7 @@ logger = logging.getLogger('MyLog')
 bot = telebot.TeleBot("5800314423:AAGrbowq4JXK5koSlUNXXd2q9Joc8sF8mvk")
 tomorrow = datetime.datetime.today() + datetime.timedelta(days=1)
 now = datetime.datetime.now()
-today_9_10 = now.replace(hour=19, minute=10)
-S_RUS = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя '
-S_RUS_UPPER = S_RUS.upper()
-
+today_9_10 = now.replace(hour=9, minute=10)
 
 @bot.message_handler(commands=['start'])
 def start(message):
