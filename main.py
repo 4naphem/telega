@@ -36,7 +36,7 @@ def review(message):
     try:
         save_mess1 = '&FirstName=' + split[0] + '&SecondName=' + split[1] + \
                      "&LastName=" + split[2] + '&Date=' + now.strftime('%Y%m%d')
-        save_mess2 = 'Запись на сегодня закончена! Записаться можно до 9:10.\n' \
+        save_mess2 = 'Запись на сегодня закончена! Записаться можно до 9:10'
         url = 'http://sqlsrv/multi/hs/Canteen/AddList?id=123' + save_mess1
         ans = requests.get(url)
         to_user = ans.json()
