@@ -28,7 +28,7 @@ def start(message):
 
 def review(message):
     now = datetime.datetime.now()
-    today_9_10 = now.replace(hour=19, minute=10)
+    today_9_10 = now.replace(hour=9, minute=10)
     tomorrow = datetime.datetime.today() + datetime.timedelta(days=1)
     # в переменную ответ пользователя и разрезание по символу пробел на ФИО
     answer = message.text
